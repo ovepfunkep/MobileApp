@@ -6,54 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="331dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInput" />
+
     <Button
         android:id="@+id/buttonAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textViewCounter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
-
-    <TextView
-        android:id="@+id/textViewCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
-
-    <Button
-        android:id="@+id/buttonSubstract"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Subtract"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCounter"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.503" />
+        android:layout_width="41dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="4dp"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="@+id/textInput"
+        app:layout_constraintTop_toTopOf="@+id/textInput" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputCounterVal"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:minWidth="48dp"
-        android:text="0"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCounter"
+        android:id="@+id/textInput"
+        android:layout_width="175dp"
+        android:layout_height="59dp"
+        android:hint="value"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

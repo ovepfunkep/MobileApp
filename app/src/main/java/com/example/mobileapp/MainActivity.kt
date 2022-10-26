@@ -1,51 +1,51 @@
 package com.example.mobileapp
 
+import DBHelper
+import Line
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
-    var counter = 0;
+    private val list = mutableListOf<String>()
+    private lateinit var adapter: RecyclerAdapter
+    private val dbHelper = DBHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val textViewCounter = findViewById<TextView>(R.id.textViewCounter)
-        val buttonAdd = findViewById<TextView>(R.id.buttonAdd)
-        val buttonSubstract = findViewById<TextView>(R.id.buttonSubstract)
-        val textInputCounterVal = findViewById<TextInputEditText>(R.id.textInputCounterVal)
-        var inputValue = textInputCounterVal.text.toString().toInt()
 
-        textInputCounterVal.addTextChangedListener (object: TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                val temp = textInputCounterVal.text.toString().toIntOrNull()
-                if (temp != null) inputValue = temp
-                else textInputCounterVal.setText("0")
-            }
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            }
-        })
-
-        buttonAdd.setOnClickListener {
-            counter += inputValue
-            textViewCounter.text = (counter).toString()
+        for (line in dbHelper.getLines()){
+            list.add(line.title)
         }
 
-        buttonSubstract.setOnClickListener {
-            if (counter - inputValue >= 0) {
-                counter -= textInputCounterVal.text.toString().toInt()
-                textViewCounter.text = (counter).toString()
-            }
-            else {
-                val toast = Toast.makeText(applicationContext, "Be positive!", Toast.LENGTH_SHORT)
-                toast.show()
+        adapter = RecyclerAdapter(list){
+            list.removeAt(it)
+            adapter.notifyItemRemoved(it)
+        }
+        val RecView = findViewById<RecyclerView>(R.id.recyclerView)
+        RecView.layoutManager = LinearLayoutManager(this)
+        RecView.adapter = adapter
+
+        val buttonAdd = findViewById<Button>(R.id.buttonAdd)
+        val textInput = findViewById<TextInputEditText>(R.id.textInput)
+
+        buttonAdd.setOnClickListener {
+            if ((textInput.text.toString() != "") && !(list.any{ elem -> elem == textInput.text.toString()}))
+            {
+                list.add(textInput.text.toString())
+                adapter.notifyItemInserted(list.lastIndex)
             }
         }
     }

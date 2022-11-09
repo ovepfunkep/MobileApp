@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mobileapp.Line
 
 
-class RecyclerAdapter(private val list: List<String>,
+class RecyclerAdapter(private val list: List<Line>,
                       private val onItemClick: (id: Int) -> Unit): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -17,7 +18,7 @@ class RecyclerAdapter(private val list: List<String>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = list[position]
+        holder.textView.text = list[position].title
         holder.button.setOnClickListener {
             onItemClick(holder.adapterPosition)
         }

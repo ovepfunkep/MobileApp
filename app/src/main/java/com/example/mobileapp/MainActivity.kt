@@ -1,7 +1,7 @@
 package com.example.mobileapp
 
 import DBHelper
-import Line
+import com.example.mobileapp.Line
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
-    private val list = mutableListOf<String>()
+    private val list = mutableListOf<Line>()
     private lateinit var adapter: RecyclerAdapter
     private val dbHelper = DBHelper(this)
 
@@ -26,14 +26,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        for (line in dbHelper.getLines()){
-            list.add(line.title)
-        }
+        list.addAll(dbHelper.getLines())
 
-        adapter = RecyclerAdapter(list){
+        adapter = RecyclerAdapter(list, {
+            dbHelper.removeLine(list[it].id.toInt())
             list.removeAt(it)
             adapter.notifyItemRemoved(it)
-        }
+        })
+
         val RecView = findViewById<RecyclerView>(R.id.recyclerView)
         RecView.layoutManager = LinearLayoutManager(this)
         RecView.adapter = adapter
@@ -42,9 +42,11 @@ class MainActivity : AppCompatActivity() {
         val textInput = findViewById<TextInputEditText>(R.id.textInput)
 
         buttonAdd.setOnClickListener {
-            if ((textInput.text.toString() != "") && !(list.any{ elem -> elem == textInput.text.toString()}))
+            val value = textInput.text.toString()
+            if ((value != "") && !(list.any{ elem -> elem.title == value}))
             {
-                list.add(textInput.text.toString())
+                val id = dbHelper.addLine(value)
+                list.add(Line(id, value))
                 adapter.notifyItemInserted(list.lastIndex)
             }
         }

@@ -3,13 +3,12 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.mobileapp.Line
 
-data class Line(val id: Int, val title: String)
 
-class DBHelper(context: Context?) :
-    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DBHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT, $KEY_TITLE TEXT NOT NULL, $KEY_IS_DONE INTEGER NOT NULL)")
+        db.execSQL("CREATE TABLE $TABLE_NAME ($KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT, $KEY_TITLE TEXT NOT NULL)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -29,7 +28,7 @@ class DBHelper(context: Context?) :
             val titleIndex: Int = cursor.getColumnIndex(KEY_TITLE)
             do {
                 val todo = Line(
-                    cursor.getInt(idIndex),
+                    cursor.getLong(idIndex),
                     cursor.getString(titleIndex)
                 )
                 result.add(todo)
@@ -39,12 +38,13 @@ class DBHelper(context: Context?) :
         return result
     }
 
-    fun addLine(title: String) {
+    fun addLine(title: String): Long {
         val database = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(KEY_TITLE, title)
-        database.insert(TABLE_NAME, null, contentValues)
+        val id = database.insert(TABLE_NAME, null, contentValues)
         close()
+        return id;
     }
 
     fun updateLine(id: Int, title: String) {
@@ -73,6 +73,5 @@ class DBHelper(context: Context?) :
         const val TABLE_NAME = "lines"
         const val KEY_ID = "id"
         const val KEY_TITLE = "title"
-        const val KEY_IS_DONE = "is_done"
     }
 }

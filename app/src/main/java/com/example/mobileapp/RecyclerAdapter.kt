@@ -10,7 +10,8 @@ import com.example.mobileapp.Line
 
 
 class RecyclerAdapter(private val list: List<Line>,
-                      private val onItemClick: (id: Int) -> Unit): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+                      private val onItemClick: (id: Int) -> Unit,
+                      private val onTextClick: (id: Int) -> Unit): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item, parent, false)
@@ -19,6 +20,9 @@ class RecyclerAdapter(private val list: List<Line>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = "${list[position].name} ${list[position].surname}"
+        holder.textView.setOnClickListener {
+            onTextClick(holder.adapterPosition)
+        }
         holder.button.setOnClickListener {
             onItemClick(holder.adapterPosition)
         }

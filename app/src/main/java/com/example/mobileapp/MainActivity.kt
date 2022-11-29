@@ -2,15 +2,13 @@ package com.example.mobileapp
 
 import DBHelper
 import android.content.Intent
-import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.*
-import androidx.activity.result.contract.ActivityResultContract
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ContentInfoCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
@@ -63,6 +61,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("DATEOFBIRTH", listMain[it].dateOfBirth)
             intent.putExtra("PHONENUMBER", listMain[it].phoneNumber)
             getResult.launch(intent)
+        }, {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${listMain[it].phoneNumber}")
+            startActivity(intent)
         })
 
         val RecView = findViewById<RecyclerView>(R.id.recyclerView)

@@ -18,7 +18,7 @@ class RecyclerAdapter(private val list: List<Line>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = list[position].title
+        holder.textView.text = "${list[position].name} ${list[position].surname}"
         holder.button.setOnClickListener {
             onItemClick(holder.adapterPosition)
         }

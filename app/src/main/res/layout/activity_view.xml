@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_view">
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="94dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChange"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputPhone"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="65dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/design_default_color_error"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonChange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputPhone"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <Button
+        android:id="@+id/buttonChange"
+        android:layout_width="186dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/teal_200"
+        android:text="change"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonBack"
+        app:layout_constraintTop_toBottomOf="@+id/textInputPhone"
+        app:layout_constraintVertical_bias="0.938" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="390dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="375dp"
+        android:text="Phone number:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonChange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSurname"
+        android:layout_width="382dp"
+        android:layout_height="38dp"
+        android:text="Surname:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDateOfBirth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <TextView
+        android:id="@+id/textViewDateOfBirth"
+        android:layout_width="387dp"
+        android:layout_height="29dp"
+        android:text="Date of birth:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSurname" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="383dp"
+        android:layout_height="40dp"
+        android:text="Name:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSurname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
